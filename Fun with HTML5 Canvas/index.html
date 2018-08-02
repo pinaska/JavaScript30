@@ -24,20 +24,70 @@ function changeOpacity(size, offset){
   }
 }
 changeOpacity(20,40);
-//creating a triangle
-ctx.beginPath();
+
+//creating triangles
 ctx.strokeStyle= "deeppink";// how to get the local var rgba from changeOpacity function?
-ctx.moveTo(100, 30);
-ctx.lineTo(150, 115);
-ctx.lineTo(50, 115);
-ctx.lineTo(100,30);
+ctx.beginPath();
+for (var i=10; i<=120; i=i+5){
+  ctx.moveTo(70+i, i);
+  ctx.lineTo(120+i, 85+i);
+  ctx.lineTo(20+i, 85+i);
+  ctx.lineTo(70+ i,i);
+
+}
 ctx.stroke();
 
+
 //following Wes Bos challange
-ctx.strokeStyle = '#BADA55';
+// ctx.strokeStyle = '#BADA55';
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
+ctx.lineWidth= 20;
+//try and play with globaCompositeOperator
 
+
+let isDrawing = false;
+let lastX = 0;
+let lastY = 0;
+let hue = 0;
+let direction = true;
+
+
+
+
+function draw(e){
+if (!isDrawing) return; //stop the funtcion from running when they are not moused down
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+
+  ctx.beginPath();
+  ctx.moveTo(lastX, lastY);
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+  [lastX, lastY] = [e.offsetX, e.offsetY]; //structuring in an array
+  hue++;
+  if(hue >= 360){
+    hie=0;
+  }
+  if (ctx.lineWidth >= 100 || ctx.lineWidth<=1){
+    direction = !direction //change of the direction
+  }
+  if(direction){
+    ctx.lineWidth++;
+  }
+  else{
+    ctx.lineWidth--;
+  }
+ 
+}
+canvas.addEventListener('mousedown',(e) =>{
+  isDrawing = true;
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+
+  });
+
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () =>isDrawing = false);
 
 </script>
 
