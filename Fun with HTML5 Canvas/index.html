@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<script>
+const canvas = document.querySelector('#draw');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+//creating some squares with changed opacity. How to make the second square pink?
+const size = 50;
+const offset = 20;
+function changeOpacity(size, offset){
+  for (var i = 0.1; i < 1; i = i + 0.05) {
+  var rgba = "rgba(0, 0, 255, " + i + ")";
+  ctx.fillStyle = rgba;
+  ctx.fillRect(offset, offset, size, size);
+  offset = offset + 10;
+  }
+}
+changeOpacity(20,40);
+//creating a triangle
+ctx.beginPath();
+ctx.strokeStyle= "deeppink";// how to get the local var rgba from changeOpacity function?
+ctx.moveTo(100, 30);
+ctx.lineTo(150, 115);
+ctx.lineTo(50, 115);
+ctx.lineTo(100,30);
+ctx.stroke();
+
+//following Wes Bos challange
+ctx.strokeStyle = '#BADA55';
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+
+
+</script>
+
+<style>
+  html, body {
+    margin:0;
+  }
+</style>
+
+</body>
+</html>
