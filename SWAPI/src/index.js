@@ -1,5 +1,6 @@
 import axios from 'axios'; 
 import {showResults} from './js/search-results';
+
 import './scss/style.scss';
 
 const searchFormEl = document.querySelector('#searchForm');
@@ -28,3 +29,4 @@ searchFormEl.addEventListener('submit', function(e){
     })
         .catch(err => console.log(err));
 });
+
